@@ -22,6 +22,7 @@ export default {
         primary: {
           DEFAULT: "hsl(var(--primary))",
           foreground: "hsl(var(--primary-foreground))",
+          hover: "hsl(var(--primary-hover))",
         },
         secondary: {
           DEFAULT: "hsl(var(--secondary))",
@@ -46,6 +47,21 @@ export default {
         card: {
           DEFAULT: "hsl(var(--card))",
           foreground: "hsl(var(--card-foreground))",
+        },
+        authentic: {
+          DEFAULT: "hsl(var(--authentic))",
+          foreground: "hsl(var(--authentic-foreground))",
+          light: "hsl(var(--authentic-light))",
+        },
+        fake: {
+          DEFAULT: "hsl(var(--fake))",
+          foreground: "hsl(var(--fake-foreground))",
+          light: "hsl(var(--fake-light))",
+        },
+        uncertain: {
+          DEFAULT: "hsl(var(--uncertain))",
+          foreground: "hsl(var(--uncertain-foreground))",
+          light: "hsl(var(--uncertain-light))",
         },
         sidebar: {
           DEFAULT: "hsl(var(--sidebar-background))",
