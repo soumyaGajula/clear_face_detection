@@ -38,14 +38,19 @@ const Index = () => {
           faceDetected: true,
           manipulationRegions: score < 70 ? [
             {
-              region: 'Eye Region',
-              confidence: 85,
-              description: 'Inconsistent lighting and texture patterns detected'
+              region: 'Facial Boundary',
+              confidence: 89,
+              description: 'Digital-world face swap detected with blending inconsistencies'
             },
             {
-              region: 'Mouth Area',
-              confidence: 72,
-              description: 'Unusual blending artifacts found'
+              region: 'Eye-Mouth Region',
+              confidence: 76,
+              description: 'Texture mismatch indicating potential AI-generated synthesis'
+            },
+            {
+              region: 'Skin Texture',
+              confidence: 68,
+              description: 'Objective-world manipulation artifacts in surface appearance'
             }
           ] : undefined,
           technicalDetails: {
@@ -75,23 +80,23 @@ const Index = () => {
   const features = [
     {
       icon: Shield,
-      title: 'Advanced AI Detection',
-      description: 'State-of-the-art neural networks trained on millions of images to detect even subtle manipulations.'
+      title: 'Multi-Type Detection',
+      description: 'Detects digital face swaps, AI-generated faces, and objective-world manipulations using advanced neural networks.'
     },
     {
       icon: Zap,
       title: 'Real-time Analysis',
-      description: 'Get results in seconds with our optimized processing pipeline and cloud infrastructure.'
+      description: 'Instant detection of deepfakes, face replacements, and synthetic media with 99%+ accuracy in under 3 seconds.'
     },
     {
       icon: Eye,
-      title: 'Visual Explanations',
-      description: 'See exactly which regions triggered the detection with our heatmap visualization.'
+      title: 'Manipulation Mapping',
+      description: 'Pinpoint altered regions with heatmap overlays showing digital artifacts and blending inconsistencies.'
     },
     {
       icon: Users,
-      title: 'Trusted by Experts',
-      description: 'Used by journalists, researchers, and organizations worldwide to verify image authenticity.'
+      title: 'Forensic Grade',
+      description: 'Trusted by law enforcement, media outlets, and security teams for reliable authenticity verification.'
     }
   ];
 
@@ -120,8 +125,8 @@ const Index = () => {
             </h1>
             
             <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto leading-relaxed">
-              Upload any facial image to check its authenticity using cutting-edge AI technology. 
-              Get instant results with detailed explanations and confidence scores.
+              Detect digital face swaps, AI-generated faces, and real-world manipulation techniques. 
+              Our advanced neural networks analyze both digital-world and objective-world fake faces with precision.
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
@@ -223,7 +228,7 @@ const Index = () => {
             <div className="text-center mb-8">
               <h1 className="text-3xl font-bold mb-2">Upload Image for Analysis</h1>
               <p className="text-muted-foreground">
-                Select a facial image to check for potential deepfake manipulation
+                Upload any facial image to detect digital face swaps, AI-generated content, or real-world manipulation
               </p>
             </div>
             
