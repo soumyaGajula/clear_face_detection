@@ -69,7 +69,7 @@ export const ResultsPanel: React.FC<ResultsPanelProps> = ({
         <Card className="p-6">
           <div className="space-y-4">
             <div className="flex items-center justify-between">
-              <h3 className="text-lg font-semibold">Analysis Image</h3>
+              <h3 className="text-lg font-semibold">Face Analysis</h3>
               <Button
                 variant="outline"
                 size="sm"
@@ -79,12 +79,12 @@ export const ResultsPanel: React.FC<ResultsPanelProps> = ({
                 {showHeatmap ? (
                   <>
                     <EyeOff className="w-3 h-3 mr-1" />
-                    Hide Regions
+                    Hide Heatmap
                   </>
                 ) : (
                   <>
                     <Eye className="w-3 h-3 mr-1" />
-                    Show Regions
+                    Show Heatmap
                   </>
                 )}
               </Button>
@@ -97,9 +97,9 @@ export const ResultsPanel: React.FC<ResultsPanelProps> = ({
                 className="w-full h-auto max-h-80 object-contain"
               />
               {showHeatmap && (
-                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-red-500/20 to-transparent animate-pulse">
+                <div className="absolute inset-0 bg-gradient-to-br from-red-500/30 via-transparent to-yellow-500/20 animate-pulse rounded-lg">
                   <div className="absolute top-4 left-4 bg-black/70 text-white text-xs px-2 py-1 rounded">
-                    Heatmap Overlay
+                    Face Region Heatmap
                   </div>
                 </div>
               )}

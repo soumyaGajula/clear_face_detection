@@ -101,9 +101,9 @@ export const UploadArea: React.FC<UploadAreaProps> = ({ onFileSelect, isAnalyzin
           </div>
           
           <div>
-            <h3 className="text-xl font-semibold mb-2">Upload Image for Analysis</h3>
+            <h3 className="text-xl font-semibold mb-2">Upload Face Image for Analysis</h3>
             <p className="text-muted-foreground mb-4">
-              Drag and drop your image here, or click to browse
+              Upload an image containing a clear face for authenticity analysis. Supports JPEG, PNG, and WebP formats up to 10MB.
             </p>
           </div>
 

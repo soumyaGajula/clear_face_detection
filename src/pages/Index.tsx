@@ -29,37 +29,37 @@ const Index = () => {
       const score = Math.floor(Math.random() * 100);
       const confidence = Math.floor(Math.random() * 30) + 70;
       
-      const mockResult: AnalysisResult = {
-        score,
-        confidence,
-        processingTime: Math.floor(Math.random() * 2000) + 1000,
-        imagePreview,
-        analysis: {
-          faceDetected: true,
-          manipulationRegions: score < 70 ? [
-            {
-              region: 'Face Boundaries',
-              confidence: 89,
-              description: 'Digital-world fake face detected with unnatural edge blending'
-            },
-            {
-              region: 'Facial Features',
-              confidence: 76,
-              description: 'AI-generated face characteristics found in eye and mouth regions'
-            },
-            {
-              region: 'Face Texture',
-              confidence: 68,
-              description: 'Objective-world face manipulation artifacts detected in skin patterns'
+        const mockResult: AnalysisResult = {
+          score,
+          confidence,
+          processingTime: Math.floor(Math.random() * 2000) + 1000,
+          imagePreview,
+          analysis: {
+            faceDetected: true,
+            manipulationRegions: score < 70 ? [
+              {
+                region: 'Overall facial authenticity',
+                confidence: 89,
+                description: 'High confidence of digital manipulation detected in face region'
+              },
+              {
+                region: 'Texture consistency',
+                confidence: 76,
+                description: 'Artificial smoothing patterns suggest AI-generated facial content'
+              },
+              {
+                region: 'Lighting coherence',
+                confidence: 68,
+                description: 'Inconsistent illumination indicates composite manipulation'
+              }
+            ] : undefined,
+            technicalDetails: {
+              resolution: '1920x1080',
+              fileSize: (file.size / 1024 / 1024).toFixed(1) + ' MB',
+              format: file.type.split('/')[1].toUpperCase()
             }
-          ] : undefined,
-          technicalDetails: {
-            resolution: '1920x1080',
-            fileSize: (file.size / 1024 / 1024).toFixed(1) + ' MB',
-            format: file.type.split('/')[1].toUpperCase()
           }
-        }
-      };
+        };
       
       setAnalysisResult(mockResult);
       setIsAnalyzing(false);
@@ -80,23 +80,23 @@ const Index = () => {
   const features = [
     {
       icon: Shield,
-      title: 'Face Fake Detection',
-      description: 'Identifies digital face swaps, AI-generated faces, and objective-world facial manipulations with precision.'
+      title: 'Whole-Face Analysis',
+      description: 'Single authenticity score for the entire face region without invasive feature overlays or boundaries.'
     },
     {
       icon: Zap,
-      title: 'Instant Face Analysis',
-      description: 'Real-time detection of fake faces, face replacements, and synthetic facial content in under 3 seconds.'
+      title: 'Clean Detection',
+      description: 'Professional analysis without facial boundaries, landmarks, or feature markers for clean results.'
     },
     {
       icon: Eye,
-      title: 'Facial Region Mapping',
-      description: 'Highlights manipulated facial areas with detailed heatmaps showing fake face indicators and artifacts.'
+      title: 'Face-Only Focus',
+      description: 'Exclusively analyzes facial authenticity, ignoring background and non-face elements completely.'
     },
     {
       icon: Users,
-      title: 'Professional Grade',
-      description: 'Trusted by security experts and investigators for reliable face authenticity verification.'
+      title: 'Trust-Focused',
+      description: 'Designed for professional use with clear, actionable results and comprehensive confidence scoring.'
     }
   ];
 
@@ -119,14 +119,14 @@ const Index = () => {
             </Badge>
             
             <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent">
-              Detect Face Fakes
+              Face Authenticity
               <br />
-              <span className="text-4xl md:text-6xl">Verify Authenticity</span>
+              <span className="text-4xl md:text-6xl">Detection System</span>
             </h1>
             
             <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto leading-relaxed">
-              Identify fake faces including digital face swaps, AI-generated faces, and manipulated facial images. 
-              Our system detects both digital-world and objective-world face fakes with forensic-grade accuracy.
+              Advanced AI analysis focused exclusively on facial authenticity. Detect digital manipulation 
+              and AI-generated faces with single-score confidence assessment.
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
@@ -228,7 +228,7 @@ const Index = () => {
             <div className="text-center mb-8">
               <h1 className="text-3xl font-bold mb-2">Upload Face Image for Analysis</h1>
               <p className="text-muted-foreground">
-                Upload any facial image to detect fake faces, digital face swaps, or AI-generated facial content
+                Upload an image containing a clear face for whole-face authenticity analysis
               </p>
             </div>
             
