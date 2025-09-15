@@ -38,19 +38,19 @@ const Index = () => {
           faceDetected: true,
           manipulationRegions: score < 70 ? [
             {
-              region: 'Facial Boundary',
+              region: 'Face Boundaries',
               confidence: 89,
-              description: 'Digital-world face swap detected with blending inconsistencies'
+              description: 'Digital-world fake face detected with unnatural edge blending'
             },
             {
-              region: 'Eye-Mouth Region',
+              region: 'Facial Features',
               confidence: 76,
-              description: 'Texture mismatch indicating potential AI-generated synthesis'
+              description: 'AI-generated face characteristics found in eye and mouth regions'
             },
             {
-              region: 'Skin Texture',
+              region: 'Face Texture',
               confidence: 68,
-              description: 'Objective-world manipulation artifacts in surface appearance'
+              description: 'Objective-world face manipulation artifacts detected in skin patterns'
             }
           ] : undefined,
           technicalDetails: {
@@ -80,23 +80,23 @@ const Index = () => {
   const features = [
     {
       icon: Shield,
-      title: 'Multi-Type Detection',
-      description: 'Detects digital face swaps, AI-generated faces, and objective-world manipulations using advanced neural networks.'
+      title: 'Face Fake Detection',
+      description: 'Identifies digital face swaps, AI-generated faces, and objective-world facial manipulations with precision.'
     },
     {
       icon: Zap,
-      title: 'Real-time Analysis',
-      description: 'Instant detection of deepfakes, face replacements, and synthetic media with 99%+ accuracy in under 3 seconds.'
+      title: 'Instant Face Analysis',
+      description: 'Real-time detection of fake faces, face replacements, and synthetic facial content in under 3 seconds.'
     },
     {
       icon: Eye,
-      title: 'Manipulation Mapping',
-      description: 'Pinpoint altered regions with heatmap overlays showing digital artifacts and blending inconsistencies.'
+      title: 'Facial Region Mapping',
+      description: 'Highlights manipulated facial areas with detailed heatmaps showing fake face indicators and artifacts.'
     },
     {
       icon: Users,
-      title: 'Forensic Grade',
-      description: 'Trusted by law enforcement, media outlets, and security teams for reliable authenticity verification.'
+      title: 'Professional Grade',
+      description: 'Trusted by security experts and investigators for reliable face authenticity verification.'
     }
   ];
 
@@ -115,18 +115,18 @@ const Index = () => {
           
           <div className="relative container mx-auto px-4 py-24 text-center">
             <Badge variant="secondary" className="mb-6 text-sm">
-              🛡️ Advanced DeepFake Detection
+              🛡️ Advanced Face Fake Detection
             </Badge>
             
             <h1 className="text-5xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-transparent">
-              Detect DeepFakes
+              Detect Face Fakes
               <br />
-              <span className="text-4xl md:text-6xl">Protect Reality</span>
+              <span className="text-4xl md:text-6xl">Verify Authenticity</span>
             </h1>
             
             <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto leading-relaxed">
-              Detect digital face swaps, AI-generated faces, and real-world manipulation techniques. 
-              Our advanced neural networks analyze both digital-world and objective-world fake faces with precision.
+              Identify fake faces including digital face swaps, AI-generated faces, and manipulated facial images. 
+              Our system detects both digital-world and objective-world face fakes with forensic-grade accuracy.
             </p>
             
             <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
@@ -226,9 +226,9 @@ const Index = () => {
         <div className="container mx-auto px-4 py-12">
           <div className="max-w-2xl mx-auto">
             <div className="text-center mb-8">
-              <h1 className="text-3xl font-bold mb-2">Upload Image for Analysis</h1>
+              <h1 className="text-3xl font-bold mb-2">Upload Face Image for Analysis</h1>
               <p className="text-muted-foreground">
-                Upload any facial image to detect digital face swaps, AI-generated content, or real-world manipulation
+                Upload any facial image to detect fake faces, digital face swaps, or AI-generated facial content
               </p>
             </div>
             
@@ -258,9 +258,9 @@ const Index = () => {
         <div className="container mx-auto px-4 py-12">
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-8">
-              <h1 className="text-3xl font-bold mb-2">Analysis Complete</h1>
+              <h1 className="text-3xl font-bold mb-2">Face Analysis Complete</h1>
               <p className="text-muted-foreground">
-                Here are the results from our deepfake detection analysis
+                Here are the results from our face fake detection analysis
               </p>
             </div>
             
