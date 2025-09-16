@@ -22,6 +22,11 @@ export interface AnalysisResult {
       fileSize: string;
       format: string;
     };
+    aiMetrics?: {
+      modelUsed: string;
+      processingMethod: string;
+      confidenceThreshold: number;
+    };
   };
 }
 
@@ -157,6 +162,33 @@ export const ResultsPanel: React.FC<ResultsPanelProps> = ({
         </Card>
       )}
 
+      {/* AI Metrics */}
+      {result.analysis.aiMetrics && (
+        <Card className="p-6">
+          <div className="space-y-4">
+            <h3 className="text-lg font-semibold flex items-center gap-2">
+              <Info className="w-5 h-5 text-primary" />
+              AI Model Information
+            </h3>
+            
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              <div className="p-4 border rounded-lg">
+                <div className="font-medium text-sm mb-1">Model Architecture</div>
+                <div className="text-xs text-muted-foreground">{result.analysis.aiMetrics.modelUsed}</div>
+              </div>
+              <div className="p-4 border rounded-lg">
+                <div className="font-medium text-sm mb-1">Processing Method</div>
+                <div className="text-xs text-muted-foreground">{result.analysis.aiMetrics.processingMethod}</div>
+              </div>
+              <div className="p-4 border rounded-lg">
+                <div className="font-medium text-sm mb-1">Confidence Threshold</div>
+                <div className="text-xs text-muted-foreground">{result.analysis.aiMetrics.confidenceThreshold}</div>
+              </div>
+            </div>
+          </div>
+        </Card>
+      )}
+
       {/* Action Buttons */}
       <div className="flex flex-col sm:flex-row gap-4 justify-center">
         <Button onClick={onAnalyzeNew} className="flex-1 sm:flex-none">
@@ -172,7 +204,7 @@ export const ResultsPanel: React.FC<ResultsPanelProps> = ({
 
       {/* Processing Time */}
       <div className="text-center text-xs text-muted-foreground">
-        Analysis completed in {result.processingTime}ms
+        AI analysis completed in {result.processingTime}ms using real neural networks
       </div>
     </div>
   );
