@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from 'react';
-import { Upload, Image, AlertCircle } from 'lucide-react';
+import { Upload, Image, Video, AlertCircle } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import uploadIcon from '@/assets/upload-icon.png';
@@ -24,15 +24,18 @@ export const UploadArea: React.FC<UploadAreaProps> = ({ onFileSelect, isAnalyzin
   }, []);
 
   const validateFile = (file: File): string => {
-    const validTypes = ['image/jpeg', 'image/png', 'image/webp'];
-    const maxSize = 10 * 1024 * 1024; // 10MB
+    const validTypes = [
+      'image/jpeg', 'image/png', 'image/webp',
+      'video/mp4', 'video/avi', 'video/mov', 'video/wmv'
+    ];
+    const maxSize = 50 * 1024 * 1024; // 50MB for videos
 
     if (!validTypes.includes(file.type)) {
-      return 'Please upload a valid image file (JPEG, PNG, or WebP)';
+      return 'Please upload a valid image (JPEG, PNG, WebP) or video (MP4, AVI, MOV, WMV) file';
     }
 
     if (file.size > maxSize) {
-      return 'File size must be less than 10MB';
+      return 'File size must be less than 50MB';
     }
 
     return '';
@@ -85,7 +88,7 @@ export const UploadArea: React.FC<UploadAreaProps> = ({ onFileSelect, isAnalyzin
           <div className="absolute inset-0 bg-background/80 rounded-xl flex items-center justify-center">
             <div className="text-center">
               <div className="animate-spin rounded-full h-12 w-12 border-4 border-primary border-t-transparent mx-auto mb-4"></div>
-              <p className="text-lg font-medium">Analyzing Image...</p>
+              <p className="text-lg font-medium">Analyzing File...</p>
               <p className="text-sm text-muted-foreground mt-1">This may take a few moments</p>
             </div>
           </div>
@@ -101,9 +104,9 @@ export const UploadArea: React.FC<UploadAreaProps> = ({ onFileSelect, isAnalyzin
           </div>
           
           <div>
-            <h3 className="text-xl font-semibold mb-2">Upload Face Image for Analysis</h3>
+            <h3 className="text-xl font-semibold mb-2">Upload Image or Video for Analysis</h3>
             <p className="text-muted-foreground mb-4">
-              Upload an image containing a clear face for authenticity analysis. Supports JPEG, PNG, and WebP formats up to 10MB.
+              Upload an image or video containing faces for authenticity analysis. Supports images (JPEG, PNG, WebP) and videos (MP4, AVI, MOV, WMV) up to 50MB.
             </p>
           </div>
 
@@ -113,21 +116,28 @@ export const UploadArea: React.FC<UploadAreaProps> = ({ onFileSelect, isAnalyzin
             disabled={isAnalyzing}
           >
             <Upload className="w-4 h-4 mr-2" />
-            Choose Image
+            Choose File
           </Button>
 
           <div className="text-xs text-muted-foreground space-y-1">
-            <div className="flex items-center justify-center gap-2">
-              <Image className="w-3 h-3" />
-              <span>Supports JPEG, PNG, WebP (max 10MB)</span>
+            <div className="flex items-center justify-center gap-4">
+              <div className="flex items-center gap-2">
+                <Image className="w-3 h-3" />
+                <span>Images: JPEG, PNG, WebP</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Video className="w-3 h-3" />
+                <span>Videos: MP4, AVI, MOV, WMV</span>
+              </div>
             </div>
+            <div className="text-center">Max file size: 50MB</div>
           </div>
         </div>
 
         <input
           id="file-input"
           type="file"
-          accept="image/jpeg,image/png,image/webp"
+          accept="image/jpeg,image/png,image/webp,video/mp4,video/avi,video/mov,video/wmv"
           onChange={handleFileInput}
           className="hidden"
           disabled={isAnalyzing}
