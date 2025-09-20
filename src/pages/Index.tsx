@@ -6,7 +6,7 @@ import { Badge } from '@/components/ui/badge';
 import { UploadArea } from '@/components/UploadArea';
 import { ResultsPanel, AnalysisResult } from '@/components/ResultsPanel';
 import AlgorithmGraphs from '@/components/AlgorithmGraphs';
-import VideoFrameExtractor from '@/components/VideoFrameExtractor';
+import MediaFrameExtractor from '@/components/MediaFrameExtractor';
 import { Shield, Zap, Eye, Users, ArrowDown, Brain, Cpu, Layers, LogOut } from 'lucide-react';
 import heroImage from '@/assets/hero-image.jpg';
 import { performAIAnalysis } from '@/utils/aiAnalysis';
@@ -397,9 +397,9 @@ const Index = () => {
               />
             )}
 
-            {isVideo && selectedFile && (
-              <VideoFrameExtractor
-                videoFile={selectedFile}
+            {selectedFile && (
+              <MediaFrameExtractor
+                file={selectedFile}
                 onFrameAnalysis={handleFrameAnalysis}
               />
             )}
