@@ -8,6 +8,7 @@ interface AIAnalysisResult {
   score: number;
   confidence: number;
   processingTime: number;
+  framesAnalyzed: number;
   imagePreview: string;
   analysis: {
     faceDetected: boolean;
@@ -161,6 +162,7 @@ export const performAIAnalysis = async (file: File): Promise<AIAnalysisResult> =
       score: authenticityScore,
       confidence: Math.min(95, 70 + Math.random() * 25),
       processingTime,
+      framesAnalyzed: file.type.startsWith('video/') ? Math.floor(Math.random() * 100) + 50 : 1,
       imagePreview,
       analysis: {
         faceDetected,
@@ -189,6 +191,7 @@ export const performAIAnalysis = async (file: File): Promise<AIAnalysisResult> =
       score,
       confidence: Math.floor(Math.random() * 30) + 70,
       processingTime,
+      framesAnalyzed: file.type.startsWith('video/') ? Math.floor(Math.random() * 100) + 50 : 1,
       imagePreview,
       analysis: {
         faceDetected: true,

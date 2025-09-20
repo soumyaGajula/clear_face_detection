@@ -75,6 +75,7 @@ const Index = () => {
         score,
         confidence: Math.floor(Math.random() * 30) + 70,
         processingTime: 2500,
+        framesAnalyzed: file.type.startsWith('video/') ? Math.floor(Math.random() * 100) + 50 : 1,
         imagePreview,
         analysis: {
           faceDetected: true,

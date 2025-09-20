@@ -9,6 +9,7 @@ export interface AnalysisResult {
   score: number;
   confidence: number;
   processingTime: number;
+  framesAnalyzed: number;
   imagePreview: string;
   analysis: {
     faceDetected: boolean;
@@ -123,6 +124,22 @@ export const ResultsPanel: React.FC<ResultsPanelProps> = ({
               <div className="text-center p-2 bg-muted rounded">
                 <div className="font-medium">{result.analysis.technicalDetails.format}</div>
                 <div className="text-muted-foreground">Format</div>
+              </div>
+            </div>
+
+            {/* Analysis Metrics */}
+            <div className="grid grid-cols-3 gap-2 text-xs mt-4">
+              <div className="text-center p-2 bg-primary/10 rounded">
+                <div className="font-medium">{result.framesAnalyzed}</div>
+                <div className="text-muted-foreground">Frames Analyzed</div>
+              </div>
+              <div className="text-center p-2 bg-primary/10 rounded">
+                <div className="font-medium">{result.processingTime}ms</div>
+                <div className="text-muted-foreground">Processing Time</div>
+              </div>
+              <div className="text-center p-2 bg-primary/10 rounded">
+                <div className="font-medium">{result.confidence}%</div>
+                <div className="text-muted-foreground">Model Confidence</div>
               </div>
             </div>
           </div>
