@@ -11,6 +11,12 @@ export interface AnalysisResult {
   processingTime: number;
   framesAnalyzed: number;
   imagePreview: string;
+  extractedViews?: {
+    edgeDetection: string;
+    textureAnalysis: string;
+    lightingAnalysis: string;
+    colorDistribution: string;
+  };
   analysis: {
     faceDetected: boolean;
     manipulationRegions?: Array<{
@@ -202,6 +208,81 @@ export const ResultsPanel: React.FC<ResultsPanelProps> = ({
                 <div className="text-xs text-muted-foreground">{result.analysis.aiMetrics.confidenceThreshold}</div>
               </div>
             </div>
+          </div>
+        </Card>
+      )}
+
+      {/* Extracted Views for Fake Images */}
+      {result.score < 70 && result.extractedViews && (
+        <Card className="p-6">
+          <div className="space-y-4">
+            <div className="flex items-center gap-2">
+              <Eye className="w-5 h-5 text-destructive" />
+              <h3 className="text-lg font-semibold">Detailed Analysis Views</h3>
+              <Badge variant="destructive">Fake Detected</Badge>
+            </div>
+            
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+              <div className="space-y-2">
+                <h4 className="text-sm font-medium">Edge Detection</h4>
+                <div className="relative rounded-lg overflow-hidden bg-muted aspect-square">
+                  <img 
+                    src={result.extractedViews.edgeDetection} 
+                    alt="Edge detection analysis" 
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute bottom-2 left-2 bg-black/70 text-white text-xs px-1 py-0.5 rounded">
+                    Edges
+                  </div>
+                </div>
+              </div>
+              
+              <div className="space-y-2">
+                <h4 className="text-sm font-medium">Texture Analysis</h4>
+                <div className="relative rounded-lg overflow-hidden bg-muted aspect-square">
+                  <img 
+                    src={result.extractedViews.textureAnalysis} 
+                    alt="Texture analysis" 
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute bottom-2 left-2 bg-black/70 text-white text-xs px-1 py-0.5 rounded">
+                    Texture
+                  </div>
+                </div>
+              </div>
+              
+              <div className="space-y-2">
+                <h4 className="text-sm font-medium">Lighting Analysis</h4>
+                <div className="relative rounded-lg overflow-hidden bg-muted aspect-square">
+                  <img 
+                    src={result.extractedViews.lightingAnalysis} 
+                    alt="Lighting analysis" 
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute bottom-2 left-2 bg-black/70 text-white text-xs px-1 py-0.5 rounded">
+                    Light
+                  </div>
+                </div>
+              </div>
+              
+              <div className="space-y-2">
+                <h4 className="text-sm font-medium">Color Distribution</h4>
+                <div className="relative rounded-lg overflow-hidden bg-muted aspect-square">
+                  <img 
+                    src={result.extractedViews.colorDistribution} 
+                    alt="Color distribution analysis" 
+                    className="w-full h-full object-cover"
+                  />
+                  <div className="absolute bottom-2 left-2 bg-black/70 text-white text-xs px-1 py-0.5 rounded">
+                    Color
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <p className="text-xs text-muted-foreground">
+              These analytical views highlight inconsistencies and artifacts that indicate artificial generation or manipulation.
+            </p>
           </div>
         </Card>
       )}

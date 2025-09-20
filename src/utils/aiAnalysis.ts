@@ -1,4 +1,5 @@
 import { pipeline, env } from '@huggingface/transformers';
+import { generateAnalyticalViews } from './imageAnalysisViews';
 
 // Configure transformers.js
 env.allowLocalModels = false;
@@ -10,6 +11,12 @@ interface AIAnalysisResult {
   processingTime: number;
   framesAnalyzed: number;
   imagePreview: string;
+  extractedViews?: {
+    edgeDetection: string;
+    textureAnalysis: string;
+    lightingAnalysis: string;
+    colorDistribution: string;
+  };
   analysis: {
     faceDetected: boolean;
     manipulationRegions?: Array<{
@@ -158,12 +165,24 @@ export const performAIAnalysis = async (file: File): Promise<AIAnalysisResult> =
     const processingTime = Date.now() - startTime;
     console.log(`✅ AI analysis completed in ${processingTime}ms`);
     
+    // Generate analytical views if image appears fake
+    let extractedViews;
+    if (authenticityScore < 70 && !file.type.startsWith('video/')) {
+      try {
+        console.log('🔍 Generating analytical views for suspicious image...');
+        extractedViews = await generateAnalyticalViews(file);
+      } catch (error) {
+        console.warn('Failed to generate analytical views:', error);
+      }
+    }
+    
     return {
       score: authenticityScore,
       confidence: Math.min(95, 70 + Math.random() * 25),
       processingTime,
       framesAnalyzed: file.type.startsWith('video/') ? Math.floor(Math.random() * 100) + 50 : 1,
       imagePreview,
+      extractedViews,
       analysis: {
         faceDetected,
         manipulationRegions: authenticityScore < 70 ? manipulationRegions : undefined,
@@ -187,12 +206,24 @@ export const performAIAnalysis = async (file: File): Promise<AIAnalysisResult> =
     const processingTime = Date.now() - startTime;
     const score = Math.floor(Math.random() * 100);
     
+    // Generate analytical views if image appears fake
+    let extractedViews;
+    if (score < 70 && !file.type.startsWith('video/')) {
+      try {
+        console.log('🔍 Generating analytical views for suspicious image...');
+        extractedViews = await generateAnalyticalViews(file);
+      } catch (error) {
+        console.warn('Failed to generate analytical views:', error);
+      }
+    }
+    
     return {
       score,
       confidence: Math.floor(Math.random() * 30) + 70,
       processingTime,
       framesAnalyzed: file.type.startsWith('video/') ? Math.floor(Math.random() * 100) + 50 : 1,
       imagePreview,
+      extractedViews,
       analysis: {
         faceDetected: true,
         manipulationRegions: score < 70 ? [
