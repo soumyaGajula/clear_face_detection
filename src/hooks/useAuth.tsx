@@ -55,9 +55,13 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       });
 
       if (error) {
-        toast.error(error.message);
+        if (error.message.includes('User already registered')) {
+          toast.error('An account with this email already exists. Please sign in instead.');
+        } else {
+          toast.error(error.message);
+        }
       } else {
-        toast.success('Account created successfully! Please check your email to verify your account.');
+        toast.success('Account created! Please check your email to verify your account before signing in.');
       }
 
       return { error };
@@ -75,7 +79,13 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
       });
 
       if (error) {
-        toast.error(error.message);
+        if (error.message.includes('Invalid login credentials')) {
+          toast.error('Invalid email or password. Please check your credentials or verify your email if you just signed up.');
+        } else if (error.message.includes('Email not confirmed')) {
+          toast.error('Please check your email and click the verification link before signing in.');
+        } else {
+          toast.error(error.message);
+        }
       } else {
         toast.success('Signed in successfully!');
       }
