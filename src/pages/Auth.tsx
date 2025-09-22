@@ -53,16 +53,14 @@ const Auth = () => {
       return;
     }
 
-    try {
-      console.log("🔍 Signing up with:", { email, fullName });
-      await signUp(email, password, fullName);
-      toast.success("Account created successfully! Please sign in.");
-    } catch (err: any) {
-      console.error("❌ Sign up failed:", err);
-      toast.error(err.message || "Failed to sign up");
-    } finally {
-      setIsSubmitting(false);
+    console.log("🔍 Signing up with:", { email, fullName });
+    const { error } = await signUp(email, password, fullName);
+    
+    if (!error) {
+      // Success is already handled in the signUp function
     }
+    
+    setIsSubmitting(false);
   };
 
   const handleSignIn = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -79,16 +77,14 @@ const Auth = () => {
       return;
     }
 
-    try {
-      console.log("🔍 Signing in with:", { email });
-      await signIn(email, password);
-      toast.success("Signed in successfully!");
-    } catch (err: any) {
-      console.error("❌ Sign in failed:", err);
-      toast.error(err.message || "Failed to sign in");
-    } finally {
-      setIsSubmitting(false);
+    console.log("🔍 Signing in with:", { email });
+    const { error } = await signIn(email, password);
+    
+    if (!error) {
+      // Success is already handled in the signIn function
     }
+    
+    setIsSubmitting(false);
   };
 
   return (
