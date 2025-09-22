@@ -1,13 +1,24 @@
-import React, { useState } from 'react';
-import { Navigate } from 'react-router-dom';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Shield, Eye, EyeOff, ArrowRight } from 'lucide-react';
-import { useAuth } from '@/hooks/useAuth';
-import { toast } from 'sonner';
+import React, { useState } from "react";
+import { Navigate } from "react-router-dom";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import {
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+} from "@/components/ui/tabs";
+import { Shield, Eye, EyeOff, ArrowRight } from "lucide-react";
+import { useAuth } from "@/hooks/useAuth";
+import { toast } from "sonner";
 
 const Auth = () => {
   const { user, loading, signUp, signIn } = useAuth();
@@ -32,18 +43,26 @@ const Auth = () => {
     setIsSubmitting(true);
 
     const formData = new FormData(e.currentTarget);
-    const email = formData.get('email') as string;
-    const password = formData.get('password') as string;
-    const fullName = formData.get('fullName') as string;
+    const email = formData.get("email") as string;
+    const password = formData.get("password") as string;
+    const fullName = formData.get("fullName") as string;
 
     if (!email || !password || !fullName) {
-      toast.error('Please fill in all fields');
+      toast.error("Please fill in all fields");
       setIsSubmitting(false);
       return;
     }
 
-    await signUp(email, password, fullName);
-    setIsSubmitting(false);
+    try {
+      console.log("🔍 Signing up with:", { email, fullName });
+      await signUp(email, password, fullName);
+      toast.success("Account created successfully! Please sign in.");
+    } catch (err: any) {
+      console.error("❌ Sign up failed:", err);
+      toast.error(err.message || "Failed to sign up");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleSignIn = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -51,17 +70,25 @@ const Auth = () => {
     setIsSubmitting(true);
 
     const formData = new FormData(e.currentTarget);
-    const email = formData.get('email') as string;
-    const password = formData.get('password') as string;
+    const email = formData.get("email") as string;
+    const password = formData.get("password") as string;
 
     if (!email || !password) {
-      toast.error('Please fill in all fields');
+      toast.error("Please fill in all fields");
       setIsSubmitting(false);
       return;
     }
 
-    await signIn(email, password);
-    setIsSubmitting(false);
+    try {
+      console.log("🔍 Signing in with:", { email });
+      await signIn(email, password);
+      toast.success("Signed in successfully!");
+    } catch (err: any) {
+      console.error("❌ Sign in failed:", err);
+      toast.error(err.message || "Failed to sign in");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -84,7 +111,8 @@ const Auth = () => {
               <TabsTrigger value="signin">Sign In</TabsTrigger>
               <TabsTrigger value="signup">Sign Up</TabsTrigger>
             </TabsList>
-            
+
+            {/* ---------- SIGN IN ---------- */}
             <TabsContent value="signin" className="mt-6">
               <form onSubmit={handleSignIn} className="space-y-4">
                 <div className="space-y-2">
@@ -98,7 +126,7 @@ const Auth = () => {
                     disabled={isSubmitting}
                   />
                 </div>
-                
+
                 <div className="space-y-2">
                   <Label htmlFor="signin-password">Password</Label>
                   <div className="relative">
@@ -126,12 +154,8 @@ const Auth = () => {
                     </Button>
                   </div>
                 </div>
-                
-                <Button 
-                  type="submit" 
-                  className="w-full"
-                  disabled={isSubmitting}
-                >
+
+                <Button type="submit" className="w-full" disabled={isSubmitting}>
                   {isSubmitting ? (
                     <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
                   ) : (
@@ -143,7 +167,8 @@ const Auth = () => {
                 </Button>
               </form>
             </TabsContent>
-            
+
+            {/* ---------- SIGN UP ---------- */}
             <TabsContent value="signup" className="mt-6">
               <form onSubmit={handleSignUp} className="space-y-4">
                 <div className="space-y-2">
@@ -157,7 +182,7 @@ const Auth = () => {
                     disabled={isSubmitting}
                   />
                 </div>
-                
+
                 <div className="space-y-2">
                   <Label htmlFor="signup-email">Email</Label>
                   <Input
@@ -169,7 +194,7 @@ const Auth = () => {
                     disabled={isSubmitting}
                   />
                 </div>
-                
+
                 <div className="space-y-2">
                   <Label htmlFor="signup-password">Password</Label>
                   <div className="relative">
@@ -201,12 +226,8 @@ const Auth = () => {
                     Password must be at least 6 characters long
                   </p>
                 </div>
-                
-                <Button 
-                  type="submit" 
-                  className="w-full"
-                  disabled={isSubmitting}
-                >
+
+                <Button type="submit" className="w-full" disabled={isSubmitting}>
                   {isSubmitting ? (
                     <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
                   ) : (
